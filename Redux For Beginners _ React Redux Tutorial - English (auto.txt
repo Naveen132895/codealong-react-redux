@@ -1,0 +1,1738 @@
+good morning my gorgeous friends on the
+
+internet in this episode we are gonna
+
+talk about Redux
+
+all right Redux what is Redux Redux is a
+
+state management tool that we can use in
+
+our projects so we can use it and react
+
+we can theoretically use it in a
+
+different frameworks as well
+
+now do I like readers no I don't like
+
+critics and the reason why you're gonna
+
+see a lot of people being like is
+
+there's a lot of boilerplate that might
+
+be going on into your projects to do a
+
+very simple thing and there is also a
+
+lot of new jargony words like this patch
+
+map state props combined reducer store
+
+as Elvis Presley dead what's the point
+
+of life so personally I'm not a big fan
+
+but a lot of jobs really use Redux
+
+because when you have large-scale
+
+application you're gonna have some state
+
+management tool and Redux being the most
+
+popular one with react that's the one
+
+that they are looking for so I want to
+
+show you all the basic things so you
+
+understand how everything works so in
+
+case we are ever gonna get hired or
+
+maybe even use it on your personal
+
+projects but personally I don't think
+
+that's really necessary because you can
+
+get away with contexts or just passing
+
+down props and react oh and lastly thank
+
+you everybody who joined me on patreon
+
+that's quite crazy I haven't even made a
+
+video about it so thank you thank you so
+
+much if you want to support me there's
+
+gonna be a link up here somewhere you
+
+can click it and you're gonna have
+
+access to I'll try to put up as much as
+
+possible extra projects for you to make
+
+tutorials discussions and source files
+
+in discord and there's a lot more so
+
+check it out up there and thank you
+
+thank you again so much okay let's get
+
+started first of all I actually want to
+
+show you what we Docs solves for us
+
+so in react on throw up figma here well
+
+look at this design I just made it very
+
+awesome okay so we can imagine that we
+
+have this app component okay this is all
+
+react okay so we have this app component
+
+and imagine that we're making a movie
+
+searching app so you would actually
+
+create a few components to kind of
+
+seclude the logic into these small
+
+components so maybe you have a search
+
+component that only searches the movies
+
+for you
+
+you will have a movie list that displays
+
+all the movies you have a login and then
+
+maybe a individual movie alright so from
+
+this movie list you would have another
+
+component that displays each individual
+
+movie all right so just basic basic
+
+react up here alright so what we learned
+
+is how we can pass data from one place
+
+to another so you can imagine that we
+
+would have the data alright so the state
+
+of our app of our movie list and here
+
+alright so if I want to have the movies
+
+I would probably put it in here okay
+
+there's no real logic of having the list
+
+of movies for the actual data and my
+
+login okay so let's take this data I
+
+made this a circle cuz one that look
+
+cool alright so if I want to have the
+
+movie data so all the movies I would put
+
+the data and here okay very cool now
+
+this way I can render out into each
+
+individual movie and this movie
+
+components I can have this data and if I
+
+want to pass down some data from this
+
+component to this component we learned
+
+that we can do that with props so I can
+
+pass some data down here alright
+
+the problem is that we cannot pass data
+
+from our movie list to something like
+
+search all right that's not possible
+
+react only flows in one direction which
+
+is from up here all the way down alright
+
+so if I want to pass some data from the
+
+movie list I can only pass it down here
+
+so whatever you render inside this movie
+
+list in this case we render the movies
+
+the movie in individual movie that's the
+
+only one that we can pass data to so how
+
+can we solve that problem maybe I want
+
+to have access to this data with the
+
+movies inside my search so whenever I
+
+search for something I can examine that
+
+data and return a new movie list so
+
+that's the first problem here and the
+
+way you would fix this is called moving
+
+up the state we're lifting up the state
+
+I don't know what they call these days
+
+but the idea is that you don't have the
+
+data about the movie
+
+inside the movie lists you would put it
+
+up here to the app alright and that way
+
+you can pass it down to the movie list
+
+if you want you can have access to it in
+
+the search if you want so again you can
+
+just pass it down and props and now you
+
+have access to all the movies inside the
+
+search ok and same goes here so I can
+
+pass it additionally down here and here
+
+maybe I can I can choose not to render
+
+things out if I'm not logged in okay
+
+now the problem is here the more
+
+components you have the crazier this is
+
+going to get okay and also why would we
+
+have the app the data with the movies in
+
+our app here that doesn't really make
+
+any sense okay usually we want to have
+
+all the logic inside the component that
+
+really uses it so movie list and here so
+
+that that's kind of the problem that
+
+we're trying to solve also imagine that
+
+we also want to have an action so maybe
+
+down here at the movie I want to delete
+
+a specific movie so that means that we
+
+would also have to have a function
+
+alright that deletes the movie from this
+
+data state so we would also have to pass
+
+that all the way down here and then
+
+delete it and that's gonna affect here
+
+so it goes really crazy really quickly
+
+so what redux does for us is we don't
+
+add the data and here in the app or the
+
+movies list
+
+alright you can imagine that we can
+
+seclude this data into its own place
+
+alright so this is a whole brand new
+
+place I'll drag it out here and we
+
+cannot see it Thank You figma you are
+
+really awesome so where is that where is
+
+that thing grab look I cannot grab it
+
+anymore this is incredible but you can
+
+imagine that we have our data now stored
+
+completely separately here
+
+all right here perfect and now this way
+
+whenever I want to use the data so this
+
+can be the movies list this can be about
+
+anything I want alright so we store the
+
+entire states separately here and then
+
+when I want
+
+whenever I want to access something I
+
+can
+
+just go to the component I need the
+
+information from so maybe movie list and
+
+I can just add a bit of code and then I
+
+can pull out the necessary data that I
+
+need only in this component I don't have
+
+to pass down things and props and change
+
+the data and things like that so this
+
+gives us access to a way of accessing
+
+data and the components also changing
+
+the data and things of that sort so
+
+that's kind of how everything works now
+
+let's actually set this up in vs code
+
+for it to all make sense so I have an
+
+empty project here so I just set up
+
+create react app if you want to set it
+
+up - all you have to do is run MPX
+
+create react app and then give it a name
+
+in this case I gave it line Redux so run
+
+that once it runs it's gonna create you
+
+this new folder here alright and this is
+
+just an empty react project and also
+
+what you want to install is NPM install
+
+react I have my apologies Redux and
+
+react - Redux
+
+like so okay so redux is the actual
+
+state management package and react Redux
+
+gives us the ability to connect react
+
+and redux together okay so let's get rid
+
+of this make sure to install that I
+
+already did
+
+so I'm not gonna run it again so as you
+
+can see everything is installed this
+
+person is 7.1 which is really nice
+
+because it's gonna give us access to use
+
+react Redux with hooks okay I talked too
+
+much so let's let's let's kind of let's
+
+do oh my god I cannot speak let's do
+
+this from scratch I'm gonna delete a few
+
+files here that we're not gonna need so
+
+open up your source file here and I'm
+
+gonna get rid of AB dot test yes we're
+
+not gonna need these let's also get rid
+
+of tab dot CSS that's fine let me mute
+
+this okay the logo we don't need the
+
+logo and let's go into app and just get
+
+rid of everything I'm just gonna leave
+
+an empty just hello okay just for now
+
+we're just gonna set everything up here
+
+in index J yes I'm gonna show you the
+
+basics
+
+of it and then we're gonna hook it up to
+
+react to make everything work just nice
+
+so the first thing I'm gonna need is
+
+that thing called store so store now
+
+what is the store the store is basically
+
+at the state a globalized state so
+
+everything I want to have take a look at
+
+a figma example here so the store
+
+basically holds all the data or state
+
+for our application so you wouldn't have
+
+a data list of state only with the movie
+
+list here like you would normally and
+
+react so I would have the movie list
+
+here maybe some information some data or
+
+state about the login here what you
+
+would do is you would separate
+
+everything and you would have one big
+
+state that you can access anywhere and
+
+all your components say you would
+
+separate everything you would have all
+
+all your data in this big store ok so
+
+that's all it is it's just a big data
+
+here that holds all the information and
+
+state for our application okay so that's
+
+the store so a globalized globalized
+
+state ok the second thing that we're
+
+going to need is something called an
+
+action now action sounds like you're
+
+gonna do something but it's not really
+
+in the case of redux so what an action
+
+is it kind of describes what you want to
+
+do alright so you can imagine and this
+
+one we're gonna keep it simple we're
+
+going to we're just gonna build a super
+
+simple state that's gonna be called
+
+counter and it's gonna be set to zero
+
+and whenever we add maybe we hit the
+
+button plus it's gonna increment by one
+
+all right so an action would be called
+
+increment all right it's just a name you
+
+just give it you just give it whatever
+
+you want to do so you just say hey my
+
+action is increment so that's what we're
+
+gonna create here increment and there's
+
+also another one called reducer and what
+
+a reducer is it basically describes how
+
+your actions transform the state into
+
+the next state okay so what's going to
+
+happen is that this action
+
+is gonna be called the reducer is gonna
+
+check which action you did and based on
+
+the action it's gonna modify our store
+
+up here all right see how does this get
+
+gets a bit really confusing so don't
+
+worry if you don't get this straight off
+
+and we're gonna write a bit of example
+
+code here and then I'm gonna explain
+
+everything and there's a final step
+
+called dispatch and this is the way
+
+where we can actually execute that
+
+action all right we can say hey dispatch
+
+this action to the reducer so we can
+
+send that action to the reducer the
+
+reducer is gonna check what to do and
+
+then these store gets updated okay cool
+
+all right let's take a look at how we
+
+can do this because it's very hard to
+
+explain this with period so the first
+
+thing we want to do is create this store
+
+so how can we do that well we can import
+
+it from redux so I'm gonna say import
+
+create store make sure you add these
+
+curly braces here from redux okay that's
+
+tap one you create the globalized state
+
+perfect now this state is gonna take two
+
+things actually it's gonna take one
+
+thing it's gonna take a reducer so we're
+
+not gonna create the store yet this is
+
+how we would create it you would add a
+
+let store and set this equal to create
+
+store and you would pass in a reducer so
+
+reducer all right and the reducer that
+
+we're gonna make is gonna be called
+
+counter but we're not gonna do this yet
+
+okay so you remember how I said that an
+
+action just kind of describes what you
+
+want to do so imagine you can go to a
+
+store and you're like I'm hungry alright
+
+so that's the action doesn't mean you're
+
+actually buying the food you just
+
+describe what you want to do I'm hungry
+
+alright so we're gonna do this increment
+
+for now so let's create an action how
+
+does an action look it's super simple
+
+all an action is is just a function that
+
+returns an object okay he's simple
+
+function that returns an object so if I
+
+want to increase a counter I can just
+
+create a Const and I'm gonna say
+
+increment it's gonna be equal to an
+
+arrow
+
+like so and all this does again just
+
+remember it just returns an object so
+
+I'm gonna add a type to it or you can do
+
+name so what's the name of this action
+
+it's gonna be increment I'm gonna do it
+
+all in uppercase usually you're you're
+
+gonna see something called type here
+
+that for people named them but it's
+
+actually just like a name alright so
+
+what is my action name increment but
+
+you're gonna see type so I'm gonna keep
+
+it type and yeah this is what an action
+
+is now we can create a reducer that's
+
+gonna take care of all the actions
+
+related to our counter so in theory we
+
+can do another one here so we can do
+
+decrement alright and the type is gonna
+
+be decrement here okay and now let's set
+
+up a reducer so again this is just gonna
+
+be another function so I can set up a
+
+counter and what this is gonna take
+
+again just an arrow function that's
+
+gonna return a piece of object so here
+
+what we can do well first of all we need
+
+to add two parameters one is gonna be
+
+how is our counter state gonna look like
+
+so what's the initial state of our
+
+counter so I can just set state equal to
+
+zero for now you can also create this
+
+separately in a constant or a let here
+
+and then pass it in here but I can do it
+
+in here as well so that's fine and the
+
+second thing is it's gonna take in an
+
+action so now what we can do here is we
+
+can switch the action depending on its
+
+name so I can see switch action dot type
+
+so it's gonna take a look at the name
+
+alright so if you either increment or
+
+decrement and based on the name of the
+
+action it's gonna do something for us so
+
+let's open up some curly braces here and
+
+we're gonna say case if our case is
+
+increment then I want to do something
+
+here and what I want to do is I want to
+
+return state plus 1 alright so we're
+
+gonna take a look at the initial state
+
+which is 0 and then we're gonna add 1 to
+
+it okay that's all it's gonna do and
+
+once we do this it's gonna update our
+
+store so hit save on this and then we
+
+can have another one if we want so let's
+
+do case decrement
+
+I guess we set that up as well so what
+
+we can do here is we can return state
+
+minus one that we want hit save
+
+all right so this is our reducer now we
+
+can actually add it to the store so
+
+store let's say let's store it's gonna
+
+be equal to create store and we can pass
+
+in this counter ok and finally remember
+
+to actually execute that action we need
+
+to add dispatch but before we have to do
+
+that let's display it and the console so
+
+to display it we're gonna do this one so
+
+we're gonna say store dot subscribe and
+
+we're not gonna use this and react redux
+
+so you don't have to worry about it
+
+about it too much but this is just gonna
+
+take an arrow function and we're gonna
+
+say console.log store that get state
+
+like so alright and this is gonna
+
+display our store for us ok so nothing's
+
+gonna happen yet so to actually dispatch
+
+an action we're gonna say store the
+
+dispatch and all I have to do here is
+
+call one that I want I can say increment
+
+so I can say store dispatch the
+
+increment I'm gonna execute this and
+
+that's all I need to do so let's execute
+
+this and then we're gonna see what's up
+
+npm start alright
+
+let's wait for this to open and then
+
+we're gonna recap and then we're gonna
+
+implement it with dev tools and
+
+everything so everything is gonna make
+
+more sense ok so let's see if this
+
+loaded up here let's open up our console
+
+and let's go here alright that's still
+
+loading come on boy why you do this
+
+my throat is dry see this is why okay
+
+take a look we have one all right we got
+
+this message here because we haven't
+
+used decrement but we have one ok so
+
+let's take a look at what we did again
+
+what we do is we create the store which
+
+holds all of our state we have one piece
+
+of state now which is counter you're
+
+gonna have multiple reducers depend
+
+what you want to do you can have a
+
+authentification reducer that's gonna
+
+take care of identification you can have
+
+a movie list reducer you can multiple
+
+that we're gonna have in our big global
+
+state but for now we have one okay what
+
+we do is we dispatch and action
+
+all right so an action all it is is just
+
+a function that returns an object would
+
+he type increment so it just has a name
+
+to it all right and once we dispatch
+
+this our reducer it's gonna take a look
+
+at what was dispatched which action was
+
+dispatched it's gonna take a look at the
+
+name so that's why we had its which
+
+action dot type name it's gonna take a
+
+look at the name and based on the name
+
+it's gonna return a piece of state so in
+
+this case our zero was the original plus
+
+one and that's exactly what it did if I
+
+want to decrement I can do it again
+
+I guess say store that dispatch
+
+decrement alright I can maybe do this
+
+another time so two times let's take a
+
+look at what's happening so let's not
+
+this one my goodness Google Chrome as
+
+you can see we have minus one now all
+
+right so we dispatch this two times now
+
+the thing is you can set this up once
+
+but as you can see it kind of took a ton
+
+here for us to set this up just to do so
+
+little so this is why I'm saying that
+
+Redux can have a lot of boilerplate and
+
+when whenever you have a small project
+
+and it might not be worth it again but
+
+let's set this up with react and see how
+
+that works so let's start from scratch
+
+and I hope everything is gonna make more
+
+sense because with this I feel like just
+
+exercising and practicing this is gonna
+
+make it easier for you okay and we're
+
+also gonna add one additional thing so
+
+this is how I usually do it there you're
+
+gonna find different ways that people do
+
+it but usually I like to add
+
+I store in here in index Jes and then
+
+separate each reducer and action and
+
+individual files so first of all what
+
+I'm gonna do is I'm gonna create two
+
+folders here I'm gonna create one called
+
+reducers and one called
+
+actions so new folder actions okay
+
+perfect so now what I want to do is I
+
+want to create my reducer so here I'm
+
+gonna create a new file and I'm gonna
+
+call this index dot J test okay and then
+
+I'm gonna create two here so let's
+
+imagine that we have a counter and let's
+
+imagine that I also have a another
+
+reducer that's gonna take a look at if
+
+I'm logged in or logged out or maybe a
+
+toggle of a navbar so let's create a new
+
+file here we're gonna do kind of the
+
+same thing here I'm gonna say counter a
+
+yes all right now let's make another one
+
+new file and this is gonna be let's say
+
+is logged a yes alright so we have to so
+
+let's set up the first one and we can
+
+kind of we could have copy pasted what
+
+we had but let's just make it again so
+
+I'm gonna say Const counter reducer it's
+
+going to be equal to I'm gonna set in a
+
+state of 0 and an action ok and we can
+
+switch the action dot type you know
+
+which is the name and depending on what
+
+name it has we're gonna execute
+
+different things so I'm gonna say case
+
+of increment what I want to do is return
+
+a piece of state so state +1 alright and
+
+let's do decrement as well case
+
+decrement is gonna be returned state -1
+
+perfect alright so this is all we have
+
+then we can export this default counter
+
+reducer okay
+
+let's also set up another one for our is
+
+logged in so let's exit this let's go to
+
+is logged in I'm gonna create cause
+
+let's name this log two reducer set this
+
+equal to
+
+State and action alright these these are
+
+always the two things that we're gonna
+
+take in and for this one I'm gonna set
+
+the initial state equal to false
+
+all right so whenever our application
+
+first runs I want to make sure that we
+
+are not logged in so this is gonna be
+
+false again kind of we're gonna do the
+
+same thing over and over again actions
+
+outside and we're gonna say it check the
+
+name of it and return a different piece
+
+of state depending on the name so in
+
+this case I'm gonna just have one and
+
+let's say case sign in like that and
+
+when that happens what I want to do is
+
+I'm gonna return the opposite of state
+
+so it's gonna be true now all right or
+
+optionally what you can do is just say
+
+true here all right you can also return
+
+that but what I want to do is say and
+
+the opposite of false all right so
+
+that's it then we're gonna export
+
+default logged reducer all right so we
+
+have two pieces of state which are our
+
+reducers how can we hook that up to our
+
+store okay we can go here and we can
+
+import our stores so we can say import
+
+create store from redux okay that's step
+
+one now we can say const store is equal
+
+to create store and then we can pass it
+
+in but we have a problem here all right
+
+we have two reducers and we're gonna
+
+pass in here counter reducer and the is
+
+logged reducer that's not gonna work so
+
+another concept that we have is combined
+
+reducers so all that's gonna do is it's
+
+gonna take all your reducers and it's
+
+gonna combine them together into one
+
+reducer that we can actually add to our
+
+store so let's remove everything here
+
+and what we're gonna do is we're gonna
+
+add a comma here and we're gonna say
+
+combine reducers okay and actually i
+
+created a new file here and our reducers
+
+which is called end XJS
+
+we're gonna add it there just to keep
+
+this index file a bit lean so let's go
+
+back into reducers indexed ideas here
+
+and what I'm gonna do is I'm gonna
+
+import all the reducers here import the
+
+counter producer from counter import
+
+let's say is logged you can give any
+
+names you want here let's say logged
+
+reducer since we exported this as
+
+default all it means is that we can
+
+pretty much give it any name we want
+
+from dot slash is locked all right so
+
+these are the two now we want to combine
+
+it so we're gonna import from redux we
+
+want import combined reducers this is
+
+the one and now I'm going to create a
+
+you can do Const all reducers or you're
+
+gonna see route reducer whatever name
+
+you want to give to signify that you
+
+have all your reducers and this one
+
+constant here so all reducers I'm gonna
+
+call it like so just to keep it simple
+
+and here all I'm gonna do is call
+
+combined reducers and then pass in each
+
+individual reducer so it's gonna be a
+
+function with an object in here and here
+
+what you can do is you can add a counter
+
+reducer or you can give it any name you
+
+want the counter is gonna be my counter
+
+reducer alright so the name that you're
+
+giving it in here is gonna be whatever
+
+you want so you can give it whatever
+
+name you want and you can access it by
+
+this name and this is the actual value
+
+that's coming from our reducer all right
+
+so this can be anything you want you're
+
+gonna see a lot of people do something
+
+like this counter reducer only one thing
+
+and all that means is that there is some
+
+es6 syntax sugar here and all it means
+
+if you add one it actually means this so
+
+you have it both one here and one here
+
+alright but you can actually shorthand
+
+this like so but what I like to do is
+
+actually
+
+but a name that I like so I can say
+
+counter is gonna be the count reducer
+
+and then I can add a comma and logged
+
+reducer is gonna be let's say I wanted
+
+to appear as is logged and it's gonna be
+
+logged with you sir so I actually want
+
+to show you how everything in here looks
+
+so we can visualize it all right so we
+
+have everything stuck in here we're
+
+gonna go back here and import this all
+
+reducer is now so he can stick it in
+
+here okay
+
+import let's go to where is my reducer
+
+and so we can go to all reducers or yeah
+
+all reducer from dot slash reducers and
+
+notice here I don't actually need to add
+
+index because webpack is automatically
+
+gonna look at the index J s in this
+
+folder so when you have index you don't
+
+actually have to add index in here so
+
+once we have this we can add all reducer
+
+and here and we're done oh Jesus okay
+
+we're done and this is just a setup by
+
+the way we actually haven't done
+
+anything yet okay I want to visualize
+
+this so we know what's going on so what
+
+we can do is we can import a a little
+
+cool dev tool from chrome so we're
+
+having an error here reducers does not
+
+contain a default export all right so we
+
+actually need to export this all
+
+reducers exports default all reducers
+
+perfect I save that let's go back here
+
+let's see do we still still have that
+
+error all right here I messed up counter
+
+reducer let's go back here let's see
+
+where is my counter reducer it's here
+
+remember this is just a function and I
+
+messed it up so let's make sure I hit
+
+save function okay so make sure we add
+
+that arrow function there and also let's
+
+go to is logged in and add a default
+
+case here so default if nothing happens
+
+I just want to return this date so
+
+whatever form our state is in this case
+
+is false just return false here state
+
+all right so hit save and there we go
+
+okay so let's take a look in our index
+
+at yes we added it to the store and
+
+I actually want to visualize everything
+
+in my browser so we can use an extension
+
+here which is very cool it's called
+
+Redux dev tools extension alright and we
+
+can install this we can go down here we
+
+can add it to Chrome so let's go here to
+
+chrome and redux dev tools you can
+
+install this and once you do that we can
+
+add it to our project if we scroll down
+
+here and we can just copy this in here
+
+so basic store we copy this and all we
+
+do is besides our all reducer we have
+
+the comma and we just in insert that
+
+thing in there okay perfect and let's
+
+take a look if we actually see anything
+
+so in here and our app we're gonna press
+
+f12 it's gonna give us this and we can
+
+go to our redux there it is and take a
+
+look if I hit Stape here it's gonna show
+
+everything we have in our state so we
+
+have a counter which is set to zero so
+
+if we take a look again I cannot want to
+
+show you this multiple times till it
+
+kind of makes sense so here's our
+
+reducer again so as you can see we have
+
+these multiple reducers counter reducer
+
+that's one piece of state we have is
+
+logged in that's another piece of state
+
+and then we use combined reducers to
+
+combine everything in here so as you can
+
+see counter is gonna be my counter
+
+reducer so counter you're gonna see hey
+
+that's counter the name we gave I can
+
+optionally change this to my account
+
+alright so we can give any name we want
+
+here and that's gonna appear in our
+
+store as you can see my account so I'm
+
+gonna keep this counter for now but hey
+
+the counter has a piece of state which
+
+is state zero so as you can see that's
+
+the value that appears here to the right
+
+same goes with is logged in is logged in
+
+has a state of false alright we gave it
+
+a name so is logged is gonna have that
+
+state the logged reducer state take a
+
+look it's false
+
+alright so hope this kind of makes some
+
+sense and this combines everything
+
+together and we have the big state ok
+
+very cool what we want to do now is
+
+actually hook it up to our
+
+app that's hope that's why we were here
+
+and how can we hook this up so what we
+
+can do is we can say we need to import
+
+something from react Redux so we can say
+
+import from react Redux and what I want
+
+to import is something called provider
+
+all right and what this does it just
+
+connects our global States our store to
+
+our entire app down here so it's this is
+
+actually very simple all you have to do
+
+is just make some space here and wrap
+
+everything inside this provider so all
+
+your app your whole app now has access
+
+to the store so this only takes one
+
+argument which is store and we can just
+
+pass in to this store all right so this
+
+is like my store and it takes in one
+
+parameter store my store all right but I
+
+gave it the same name just to keep it
+
+simple so store ok that's it now we have
+
+access to everything inside our app ok
+
+so let's take a look how I can display
+
+maybe I want to display the counter so
+
+how can we do that I'm gonna close
+
+everything up here like that ok so you
+
+can do this from basically any component
+
+you want any component you want to
+
+access you can run this so all you have
+
+to do is to access a piece of state so
+
+maybe I want to use again I just want to
+
+use this let me close this one we don't
+
+need that anymore maybe I want to access
+
+the counter ok so what I can do is I can
+
+import something called use selector
+
+from react redux ok and now in here
+
+let's say I don't want to say hello I
+
+want to see counter and here I want to
+
+add the actual number of my counter ok
+
+so what we can do is we can say use
+
+selector and then I can extract that
+
+counter from my state here I can extract
+
+this I can say Khan's counter equals to
+
+use selector this is gonna be a function
+
+here and I'm gonna have access
+
+the entire state in here so this runs
+
+another function here and I have access
+
+to this whole big state all right so
+
+this states up here yeah I can have
+
+access to everything so I can just pull
+
+out state that counter from here and
+
+that's it now I can display it here if I
+
+want I can say counter oops too much
+
+view counter hit save take a look
+
+counter is zero at the same time I can
+
+also extract is logged in if I want
+
+maybe I have some sensible data here
+
+let's say I have let's see down here I
+
+have h3 that says valuable information I
+
+shouldn't see if I'm not logged in okay
+
+and in here what I can do is I can
+
+extract that is logged in if I want so
+
+this one I can go up here and say Const
+
+is logged I can set this equal to you
+
+selector again just state and I can
+
+extract State DOT is locked so we're
+
+gonna write that is logged and boom we
+
+have access to it if I want all I can do
+
+maybe I can add a conditional statement
+
+here and say hey if is logged like so
+
+then I want to run this HTML here else I
+
+don't want to see anything so I'm gonna
+
+pass in an empty string okay so if this
+
+is true this is gonna show up if it's
+
+not then nothing's gonna show up and as
+
+you can see nothing shows up because our
+
+is logged is false okay now how can we
+
+modify this so how can we increase the
+
+counter I'm gonna add two buttons here
+
+button is gonna say plus and I'm gonna
+
+add a minus as well so - okay very cool
+
+but how would we actually increment and
+
+decrement this we have our plus minus
+
+here but nothing worked so we would
+
+create an action for that and when we
+
+click it we dispatch that specific
+
+action so in my actions
+
+I just made an index that yes here it's
+
+empty and this is gonna be very simple
+
+what we're gonna do is create an export
+
+Const I'm gonna give it a name of
+
+increment all right and all this does
+
+is it's gonna have it's gonna return an
+
+object again with just the type of
+
+increment all right so that's gonna be
+
+the name of it and remember and when we
+
+dispatch this this is gonna go into our
+
+counter here it's gonna check what type
+
+of action type all right
+
+the type is increment so it's gonna
+
+return this piece of state state plus
+
+one okay so this is all we have just a
+
+function again that returns an object
+
+good so in here I want to execute that
+
+so what we do is we import our action so
+
+I'm gonna say import increment from our
+
+actions so dot slash actions alright
+
+again we don't have to add index because
+
+it's gonna automatically know and then
+
+one more thing I'm gonna import from
+
+react Redux it's something called use
+
+this patch alright this gives us the
+
+ability to dispatch an action and in
+
+here I'm gonna say cause dispatch it's
+
+gonna be equal to use dispatch like so
+
+alright in here I want to add an aunt
+
+like so whenever we click I want to
+
+dispatch that function so I'm gonna add
+
+just a callback function here I'm gonna
+
+say this badge my increment alright so I
+
+want to execute this increment thanks so
+
+ok run this let's take a look back here
+
+it's increment let's not miss ball that
+
+and everything seems to be working all
+
+right let's go to our state as you can
+
+see it's still 0 but when we hit plus
+
+but it updates to 1 so that's very cool
+
+boom-boom-boom 5 6 7 and everything
+
+works the way we want and we have the
+
+difference here which is really cool it
+
+change it it shows us what changed so
+
+let me refresh this as you can see if I
+
+have plus it's gonna say hello our
+
+counter increased from 0 to 1 and as you
+
+can see here it also shows us the
+
+function that the action I ran we do it
+
+multiple times I can even jump back to 1
+
+if I want to see I can jump back here to
+
+see my state in this position and yeah
+
+there's a lot of cool things that you
+
+can do with this dev tool it's really
+
+well made you can also play this back to
+
+see what you did take a look very cool
+
+ok
+
+so that works that's also hook up our
+
+decrement to do that we can just go back
+
+to our actions copy paste this down here
+
+just have decrement and decrement thank
+
+so AB dot J yes we import the decrement
+
+and kind of copy/paste this so let me
+
+just delete this copy pastes down here
+
+and just change this to decrement and
+
+everything should still work the same
+
+way plus plus plus minus minus minus yep
+
+everything works perfectly okay lastly I
+
+want to show you this what if I want to
+
+have an argument here so I want to have
+
+an actual piece of dating maybe I want
+
+to increment this by 5 like so so what
+
+you need to do is let's increment by 5
+
+hit save I'm gonna go back to my actions
+
+here and I'm gonna add something else to
+
+this so now it takes a parameter here we
+
+added 5 so it's gonna take let's say
+
+maybe a multiply or the number I want to
+
+change it by so maybe it's gonna take an
+
+in number of increment so here what you
+
+can do is add a piece of data and you're
+
+gonna see that people usually say
+
+payload to this so I'm gonna return also
+
+the number I want to increment by so I'm
+
+gonna add number here ok so now in my
+
+reducer I'm not gonna return state plus
+
+1 what I can say is I'm gonna return
+
+state plus action dot payload alright so
+
+this 5 so 0 plus 5 and then it's gonna
+
+be 5 it's gonna say 5 plus 5 so let's
+
+take a look and take a look now we are
+
+incrementing by 5 right yeah okay
+
+oh I talk so much alright it's time to
+
+go so see me a goodbye song all right
+
+I'll let you sing sing the goodbye song
+
+now walk away
+
+he by my friends
+
